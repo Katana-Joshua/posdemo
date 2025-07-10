@@ -198,6 +198,9 @@ export default defineConfig({
 	],
 	server: {
 		cors: true,
+		proxy: {
+			'/api': 'http://localhost:3001',
+		},
 		headers: {
 			'Cross-Origin-Embedder-Policy': 'credentialless',
 		},
