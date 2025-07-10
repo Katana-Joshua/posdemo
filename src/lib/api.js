@@ -148,6 +148,12 @@ class ApiClient {
   async getStaff() {
     return this.request('/staff');
   }
+
+  async deleteStaff(id) {
+    return this.request(`/staff/${id}`, {
+      method: 'DELETE',
+    });
+  }
 }
 
 export const apiClient = new ApiClient(); 

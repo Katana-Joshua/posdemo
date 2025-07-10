@@ -63,11 +63,13 @@ const StaffManagement = () => {
 
   const handleDelete = async (userId, name) => {
     if (window.confirm(`Are you sure you want to remove ${name}? This action is irreversible.`)) {
-      toast({
-        title: "Feature In Development",
-        description: "User deletion requires server-side permissions. This feature is not fully enabled yet.",
-        variant: "default",
-      });
+      try {
+        await apiClient.deleteStaff(userId);
+        toast({ title: "Success", description: `${name} has been deleted.` });
+        fetchStaff();
+      } catch (error) {
+        toast({ title: "Failed to delete staff", description: error.message, variant: "destructive" });
+      }
     }
   };
 

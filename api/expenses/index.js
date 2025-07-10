@@ -1,5 +1,5 @@
-import { getPool } from './_db.js';
-import { authenticateToken } from './_auth.js';
+import { getPool } from '../_db.js';
+import { authenticateToken } from '../_auth.js';
 
 export default async function handler(req, res) {
   const pool = getPool();
@@ -25,21 +25,6 @@ export default async function handler(req, res) {
       );
       const [newExpense] = await pool.execute('SELECT * FROM expenses WHERE id = ?', [result.insertId]);
       res.status(201).json(newExpense[0]);
-    } catch (error) {
-      res.status(500).json({ error: 'Server error', details: error.message });
-    }
-  } else if (req.method === 'DELETE') {
-    // Auth required
-    const user = await authenticateToken(req, res);
-    if (!user) return;
-    if (user.role !== 'admin') {
-      return res.status(403).json({ error: 'Only admins can delete expenses' });
-    }
-    const { id } = req.body;
-    if (!id) return res.status(400).json({ error: 'Missing id' });
-    try {
-      await pool.execute('DELETE FROM expenses WHERE id = ?', [id]);
-      res.status(200).json({ message: 'Expense deleted successfully' });
     } catch (error) {
       res.status(500).json({ error: 'Server error', details: error.message });
     }

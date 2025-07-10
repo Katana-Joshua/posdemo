@@ -1,5 +1,5 @@
-import { getPool } from './_db.js';
-import { authenticateToken } from './_auth.js';
+import { getPool } from '../_db.js';
+import { authenticateToken } from '../_auth.js';
 
 export default async function handler(req, res) {
   const pool = getPool();
@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const user = await authenticateToken(req, res);
     if (!user) return;
     try {
-      const [rows] = await pool.execute('SELECT * FROM shifts ORDER BY start_time DESC');
+      const [rows] = await pool.execute('SELECT id, email, role, name, created_at FROM users ORDER BY name');
       res.status(200).json(rows);
     } catch (error) {
       res.status(500).json({ error: 'Server error' });
