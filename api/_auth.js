@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { getPool } from './_db';
+import { getPool } from './_db.js';
 
 export async function authenticateToken(req, res) {
   const authHeader = req.headers['authorization'] || req.headers['Authorization'];
