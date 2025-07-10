@@ -1,0 +1,19 @@
+import { getPool } from './_db';
+import { authenticateToken } from './_auth';
+
+export default async function handler(req, res) {
+  const pool = getPool();
+  if (req.method === 'GET') {
+    // Auth required
+    const user = await authenticateToken(req, res);
+    if (!user) return;
+    try {
+      const [rows] = await pool.execute('SELECT id, email, role, name, created_at FROM users ORDER BY name');
+      res.status(200).json(rows);
+    } catch (error) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  } else {
+    res.status(405).end();
+  }
+} 
