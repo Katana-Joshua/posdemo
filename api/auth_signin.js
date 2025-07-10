@@ -34,6 +34,7 @@ export default async function handler(req, res) {
       }
     });
   } catch (error) {
+    console.error('AUTH_SIGNIN ERROR:', error);
     res.status(500).json({ error: 'Server error' });
   }
 } 
