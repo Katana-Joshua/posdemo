@@ -83,7 +83,7 @@ class ApiClient {
   }
 
   async updateStock(id, quantity) {
-    return this.request(`/inventory/${id}/stock`, {
+    return this.request(`/inventory-stock?id=${id}`, {
       method: 'PUT',
       body: JSON.stringify({ quantity }),
     });
