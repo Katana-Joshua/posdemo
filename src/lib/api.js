@@ -70,14 +70,14 @@ class ApiClient {
   }
 
   async updateInventoryItem(id, item) {
-    return this.request(`/inventory/${id}`, {
+    return this.request(`/inventory-action?id=${id}`, {
       method: 'PUT',
       body: JSON.stringify(item),
     });
   }
 
   async deleteInventoryItem(id) {
-    return this.request(`/inventory/${id}`, {
+    return this.request(`/inventory-action?id=${id}`, {
       method: 'DELETE',
     });
   }
