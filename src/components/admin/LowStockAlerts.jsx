@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { usePOS } from '@/contexts/POSContext';
 import { toast } from '@/components/ui/use-toast';
 import { AlertTriangle, Package, ShoppingCart } from 'lucide-react';
-import apiClient from '@/lib/apiClient'; // Added import for apiClient
+import { apiClient } from '@/lib/api';
 
 // Utility to strip leading zeros
 const stripLeadingZeros = num => {
