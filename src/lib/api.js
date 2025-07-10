@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = '';
 
 class ApiClient {
   constructor() {
@@ -11,7 +11,7 @@ class ApiClient {
   }
 
   async request(endpoint, options = {}) {
-    const url = `${this.baseURL}${endpoint}`;
+    const url = `${this.baseURL}/api${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -23,12 +23,10 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
-      
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.error || 'Request failed');
       }
-
       return await response.json();
     } catch (error) {
       console.error('API request failed:', error);
@@ -38,22 +36,19 @@ class ApiClient {
 
   // Auth methods
   async signUp(email, password, name, role = 'cashier') {
-    return this.request('/auth/signup', {
+    return this.request('/auth_signup', {
       method: 'POST',
       body: JSON.stringify({ email, password, name, role }),
     });
   }
 
   async signIn(email, password) {
-    const response = await this.request('/auth/signin', {
+    const response = await this.request('/auth_signin', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
-    
-    // Store token
     localStorage.setItem('auth_token', response.token);
     localStorage.setItem('auth_user', JSON.stringify(response.user));
-    
     return response;
   }
 
