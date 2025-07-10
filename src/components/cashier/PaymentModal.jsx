@@ -47,7 +47,7 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
 });
 
 const PaymentModal = ({ isOpen, onClose }) => {
-  const { cart, processSale } = usePOS();
+  const { cart, processSale, refreshInventory } = usePOS();
   const [paymentMethod, setPaymentMethod] = useState('cash');
   const [customerInfo, setCustomerInfo] = useState({ name: '', contact: '' });
   const [isProcessing, setIsProcessing] = useState(false);
@@ -58,6 +58,9 @@ const PaymentModal = ({ isOpen, onClose }) => {
 
   const handlePrint = useReactToPrint({
     content: () => receiptRef.current,
+    onAfterPrint: () => {
+      refreshInventory();
+    },
   });
 
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);

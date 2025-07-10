@@ -229,6 +229,11 @@ export const POSProvider = ({ children }) => {
 
   const getLowStockItems = () => inventory.filter(item => item.stock <= item.low_stock_alert);
 
+  const refreshInventory = async () => {
+    const updatedInventory = await apiClient.getInventory();
+    setInventory(updatedInventory || []);
+  };
+
   // --- Categories ---
   const addCategory = async (name) => {
     try {
@@ -285,6 +290,7 @@ export const POSProvider = ({ children }) => {
     addCategory,
     removeCategory,
     updateCategory,
+    refreshInventory,
   };
 
   return (
