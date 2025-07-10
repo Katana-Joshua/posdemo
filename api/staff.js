@@ -14,6 +14,6 @@ export default async function handler(req, res) {
       res.status(500).json({ error: 'Server error' });
     }
   } else {
-    res.status(405).end();
+    res.status(405).json({ error: 'Method Not Allowed' });
   }
 } 
