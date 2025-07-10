@@ -1,5 +1,5 @@
-import { getPool } from '../../../_db.js';
-import { authenticateToken } from '../../../_auth.js';
+import { getPool } from './_db.js';
+import { authenticateToken } from './_auth.js';
 
 export default async function handler(req, res) {
   const pool = getPool();

@@ -83,7 +83,7 @@ class ApiClient {
   }
 
   async updateStock(id, quantity) {
-    return this.request(`/inventory-stock?id=${id}`, {
+    return this.request(`/update-stock?id=${id}`, {
       method: 'PUT',
       body: JSON.stringify({ quantity }),
     });
@@ -102,7 +102,7 @@ class ApiClient {
   }
 
   async payCreditSale(id) {
-    return this.request(`/sales/${id}/pay`, {
+    return this.request(`/sales-pay?id=${id}`, {
       method: 'PUT',
     });
   }
