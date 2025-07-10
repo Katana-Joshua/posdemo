@@ -12,9 +12,7 @@ export default async function handler(req, res) {
 
   const user = await authenticateToken(req, res);
   if (!user) return;
-  if (user.role !== 'admin') {
-    return res.status(403).json({ error: 'Only admins can update stock' });
-  }
+  // Removed admin check so both admins and cashiers can update stock
   if (!id) return res.status(400).json({ error: 'Missing id' });
 
   try {
