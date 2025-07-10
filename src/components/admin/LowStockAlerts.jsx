@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { usePOS } from '@/contexts/POSContext';
 import { toast } from '@/components/ui/use-toast';
 import { AlertTriangle, Package, ShoppingCart } from 'lucide-react';
+import apiClient from '@/lib/apiClient'; // Added import for apiClient
 
 // Utility to strip leading zeros
 const stripLeadingZeros = num => {
@@ -14,7 +15,7 @@ const stripLeadingZeros = num => {
 };
 
 const LowStockAlerts = () => {
-  const { getLowStockItems } = usePOS();
+  const { getLowStockItems, inventory, updateInventoryItem } = usePOS();
   const lowStockItems = getLowStockItems();
 
   const handleReorder = (item) => {
@@ -24,11 +25,22 @@ const LowStockAlerts = () => {
     });
   };
 
-  const handleUpdateStock = (item) => {
-    toast({
-      title: "Quick Stock Update",
-      description: "🚧 Quick stock updates aren't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
+  const handleUpdateStock = async (item) => {
+    const input = window.prompt(`Enter new stock value for ${item.name}:`, item.stock);
+    if (input === null) return; // Cancelled
+    const newStock = Number(input);
+    if (isNaN(newStock) || newStock < 0) {
+      toast({ title: "Invalid Input", description: "Please enter a valid non-negative number.", variant: "destructive" });
+      return;
+    }
+    try {
+      await apiClient.updateStock(item.id, newStock);
+      toast({ title: "Stock Updated", description: `${item.name} stock set to ${newStock}.` });
+      // Optionally refresh inventory here if needed
+      window.location.reload(); // Or call a context method to refresh inventory
+    } catch (error) {
+      toast({ title: "Update Failed", description: error.message, variant: "destructive" });
+    }
   };
 
   return (

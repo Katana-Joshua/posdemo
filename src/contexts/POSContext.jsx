@@ -134,9 +134,11 @@ export const POSProvider = ({ children }) => {
       const newSale = await apiClient.addSale(saleData);
 
       // Update inventory stock
-      const stockUpdates = cart.map(cartItem => 
-        apiClient.updateStock(cartItem.id, cartItem.quantity)
-      );
+      const stockUpdates = cart.map(cartItem => {
+        const currentItem = inventory.find(item => item.id === cartItem.id);
+        const newStock = currentItem ? (Number(currentItem.stock) - Number(cartItem.quantity)) : 0;
+        return apiClient.updateStock(cartItem.id, newStock);
+      });
       await Promise.all(stockUpdates);
 
       setSales(prev => [...prev, newSale]);

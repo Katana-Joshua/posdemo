@@ -17,7 +17,12 @@ export default async function handler(req, res) {
     // Auth required
     const user = await authenticateToken(req, res);
     if (!user) return;
-    const { description, amount, category, cashier_name } = req.body;
+    let { description, amount, category, cashier_name } = req.body;
+    // Ensure no undefined values are passed to SQL
+    description = description ?? null;
+    amount = amount ?? null;
+    category = category ?? null;
+    cashier_name = cashier_name ?? null;
     try {
       const [result] = await pool.execute(
         'INSERT INTO expenses (description, amount, category, cashier_name) VALUES (?, ?, ?, ?)',
