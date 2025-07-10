@@ -146,6 +146,7 @@ export const POSProvider = ({ children }) => {
       toast({ title: "Sale Completed", description: `Receipt #${receiptNumber}` });
       return { ...newSale, receiptNumber: newSale.receipt_number };
     } catch (error) {
+      console.error('Process Sale Error:', error);
       toast({ title: "Sale Failed", description: error.message, variant: "destructive" });
       return null;
     }
@@ -223,6 +224,7 @@ export const POSProvider = ({ children }) => {
       setInventory(inventory.filter(item => item.id !== id));
       toast({ title: "Item Deleted" });
     } catch (error) {
+      console.error('Delete Inventory Error:', error);
       toast({ title: "Error", description: error.message, variant: "destructive" });
     }
   };

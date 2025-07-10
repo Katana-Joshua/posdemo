@@ -14,7 +14,7 @@ const stripLeadingZeros = num => {
 const ExpenseTracking = () => {
   const { expenses } = usePOS();
 
-  const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  const totalExpenses = expenses.reduce((sum, expense) => sum + Number(expense.amount), 0);
 
   return (
     <div className="space-y-6">
