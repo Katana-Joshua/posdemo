@@ -1,5 +1,5 @@
-import { getPool } from './_db.js';
-import { authenticateToken } from './_auth.js';
+import { getPool } from '../_db.js';
+import { authenticateToken } from '../_auth.js';
 
 export default async function handler(req, res) {
   const pool = getPool();
@@ -33,27 +33,6 @@ export default async function handler(req, res) {
         [result.insertId]
       );
       res.status(201).json(newItem[0]);
-    } catch (error) {
-      res.status(500).json({ error: 'Server error', details: error.message });
-    }
-  } else if (req.method === 'DELETE') {
-    // Auth required
-    const user = await authenticateToken(req, res);
-    if (!user) return;
-    if (user.role !== 'admin') {
-      return res.status(403).json({ error: 'Only admins can delete inventory items' });
-    }
-    // Support both /api/inventory/:id and body { id }
-    let id = req.body && req.body.id;
-    if (!id && req.url && req.url !== '/') {
-      // Try to extract id from URL (e.g., /2)
-      const match = req.url.match(/^\/(\d+)/);
-      if (match) id = match[1];
-    }
-    if (!id) return res.status(400).json({ error: 'Missing id' });
-    try {
-      await pool.execute('DELETE FROM inventory WHERE id = ?', [id]);
-      res.status(200).json({ message: 'Inventory item deleted successfully' });
     } catch (error) {
       res.status(500).json({ error: 'Server error', details: error.message });
     }
