@@ -137,7 +137,7 @@ const AdminDashboard = () => {
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="relative">
-            <TabsList className="flex flex-nowrap overflow-x-auto whitespace-nowrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1 scrollbar-thin scrollbar-thumb-amber-700 scrollbar-track-transparent" style={{scrollbarColor:'#d97706 #0000', borderBottom: '2px solid #d97706'}}>
+            <TabsList className="flex flex-nowrap overflow-x-auto whitespace-nowrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1 scrollbar-thin scrollbar-thumb-amber-700 scrollbar-track-transparent sm:overflow-x-visible sm:whitespace-normal" style={{scrollbarColor:'#d97706 #0000', borderBottom: '2px solid #d97706'}}>
               <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
                 <FileText className="w-4 h-4 mr-2" /> Reports
               </TabsTrigger>
@@ -160,8 +160,8 @@ const AdminDashboard = () => {
                 <AlertTriangle className="w-4 h-4 mr-2" /> Alerts
               </TabsTrigger>
             </TabsList>
-            {/* Fade effect for scroll hint */}
-            <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black/80 to-transparent hidden sm:block" />
+            {/* Fade effect for scroll hint, only on mobile */}
+            <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black/80 to-transparent block sm:hidden" />
           </div>
 
           <TabsContent value="reports">
