@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,6 +20,13 @@ const AdminDashboard = () => {
   const { sales, inventory, getLowStockItems, loading } = usePOS();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('reports');
+  const tabsListRef = useRef(null);
+
+  useEffect(() => {
+    if (tabsListRef.current) {
+      tabsListRef.current.scrollLeft = 0;
+    }
+  }, [activeTab]);
 
   const handleLogout = async () => {
     await signOut();
@@ -137,7 +144,10 @@ const AdminDashboard = () => {
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="relative">
-            <TabsList className="flex flex-nowrap overflow-x-auto whitespace-nowrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1 scrollbar-thin scrollbar-thumb-amber-700 scrollbar-track-transparent sm:overflow-x-visible sm:whitespace-normal" style={{scrollbarColor:'#d97706 #0000', borderBottom: '2px solid #d97706'}}>
+            <TabsList
+              ref={tabsListRef}
+              className="flex flex-nowrap overflow-x-auto whitespace-nowrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1 scrollbar-thin scrollbar-thumb-amber-700 scrollbar-track-transparent sm:overflow-x-visible sm:whitespace-normal"
+              style={{scrollbarColor:'#d97706 #0000', borderBottom: '2px solid #d97706'}}>
               <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
                 <FileText className="w-4 h-4 mr-2" /> Reports
               </TabsTrigger>
