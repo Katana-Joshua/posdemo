@@ -136,7 +136,7 @@ const AdminDashboard = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 bg-black/20 border border-amber-800/30">
+          <TabsList className="flex flex-wrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 overflow-x-auto whitespace-nowrap gap-1 p-1">
             <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600">
               <FileText className="w-4 h-4 mr-2" /> Reports
             </TabsTrigger>
@@ -189,22 +189,6 @@ const AdminDashboard = () => {
           </TabsContent>
         </Tabs>
       </motion.div>
-      <style>{`
-  @media (max-width: 640px) {
-    .admin-dashboard-card, .admin-dashboard-section {
-      font-size: 13px !important;
-      padding: 0.5rem !important;
-      word-break: break-word;
-    }
-    .admin-dashboard-scroll {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .admin-dashboard-nowrap {
-      white-space: nowrap;
-    }
-  }
-`}</style>
     </div>
   );
 };
