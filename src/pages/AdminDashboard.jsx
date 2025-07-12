@@ -136,26 +136,26 @@ const AdminDashboard = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
-            <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1 mb-4" style={{gridTemplateRows: 'repeat(2, minmax(0, 1fr))'}}>
+            <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600 px-2 py-2 rounded text-center">
               <FileText className="w-4 h-4 mr-2" /> Reports
             </TabsTrigger>
-            <TabsTrigger value="inventory" className="data-[state=active]:bg-amber-600">
+            <TabsTrigger value="inventory" className="data-[state=active]:bg-amber-600 px-2 py-2 rounded text-center">
               <Package className="w-4 h-4 mr-2" /> Inventory
             </TabsTrigger>
-            <TabsTrigger value="credit_sales" className="data-[state=active]:bg-amber-600">
+            <TabsTrigger value="credit_sales" className="data-[state=active]:bg-amber-600 px-2 py-2 rounded text-center">
               <BookUser className="w-4 h-4 mr-2" /> Credit Sales
             </TabsTrigger>
-            <TabsTrigger value="expenses" className="data-[state=active]:bg-amber-600">
+            <TabsTrigger value="expenses" className="data-[state=active]:bg-amber-600 px-2 py-2 rounded text-center">
               <TrendingDown className="w-4 h-4 mr-2" /> Expenses
             </TabsTrigger>
-            <TabsTrigger value="staff_management" className="data-[state=active]:bg-amber-600">
+            <TabsTrigger value="staff_management" className="data-[state=active]:bg-amber-600 px-2 py-2 rounded text-center">
               <Users className="w-4 h-4 mr-2" /> Staff
             </TabsTrigger>
-            <TabsTrigger value="shift_logs" className="data-[state=active]:bg-amber-600">
+            <TabsTrigger value="shift_logs" className="data-[state=active]:bg-amber-600 px-2 py-2 rounded text-center">
               <BarChart3 className="w-4 h-4 mr-2" /> Shift Logs
             </TabsTrigger>
-            <TabsTrigger value="alerts" className="data-[state=active]:bg-amber-600">
+            <TabsTrigger value="alerts" className="data-[state=active]:bg-amber-600 px-2 py-2 rounded text-center">
               <AlertTriangle className="w-4 h-4 mr-2" /> Alerts
             </TabsTrigger>
           </TabsList>
