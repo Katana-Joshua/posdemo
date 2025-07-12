@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label';
 import { usePOS } from '@/contexts/POSContext';
 import { toast } from '@/components/ui/use-toast';
 import { CreditCard, Banknote, Smartphone, Mail, Printer, Rocket, BookUser, User } from 'lucide-react';
-import QRCode from 'qrcode.react';
 
 const Receipt = React.forwardRef(({ sale, cart }, ref) => {
   if (!sale) return null;
@@ -94,7 +93,13 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
       </div>
       <hr className="receipt-hr" />
       <div className="receipt-qr">
-        {receiptNumber && <QRCode value={receiptNumber} size={64} />}
+        {receiptNumber && (
+          <img
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(receiptNumber)}`}
+            alt="QR Code"
+            style={{ margin: '0 auto', display: 'block' }}
+          />
+        )}
         {receiptNumber && <div>Order: {receiptNumber}</div>}
       </div>
       <div className="receipt-center" style={{marginTop: 8}}>{footer}</div>
