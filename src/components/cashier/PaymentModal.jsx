@@ -8,40 +8,96 @@ import { Label } from '@/components/ui/label';
 import { usePOS } from '@/contexts/POSContext';
 import { toast } from '@/components/ui/use-toast';
 import { CreditCard, Banknote, Smartphone, Mail, Printer, Rocket, BookUser, User } from 'lucide-react';
+import QRCode from 'qrcode.react';
 
 const Receipt = React.forwardRef(({ sale, cart }, ref) => {
   if (!sale) return null;
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-  // Use correct fields for receipt number and date
+  const subtotal = total; // If you have discounts, update this
+  const tax = 0; // If you have tax logic, update this
   const receiptNumber = sale.receiptNumber || sale.receipt_number || '';
   const timestamp = sale.timestamp || sale.created_at || '';
   const customerName = sale.customerInfo?.name || sale.customer_info?.name || '';
-
+  const business = {
+    name: 'Moon Land POS',
+    address: '', // Add address if available
+    phone: '',   // Add phone if available
+  };
+  const footer = 'Thank you for your visit!';
   return (
-    <div ref={ref} className="p-4 bg-white text-black font-mono text-xs">
-      <div className="text-center mb-4">
-        <Rocket className="w-8 h-8 mx-auto mb-2" />
-        <h2 className="text-lg font-bold">Moon Land POS</h2>
-        <p>Receipt #{receiptNumber}</p>
-        <p>{timestamp ? new Date(timestamp).toLocaleString() : ''}</p>
-        {sale.paymentMethod === 'credit' && (
-            <p className="font-bold">CREDIT SALE FOR: {customerName}</p>
-        )}
+    <div ref={ref} className="receipt-print">
+      <style>{`
+        @media print {
+          .receipt-print {
+            width: 80mm;
+            max-width: 80mm;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            color: #000;
+            background: #fff;
+            margin: 0 auto;
+            padding: 0;
+          }
+        }
+        .receipt-print {
+          width: 80mm;
+          max-width: 80mm;
+          font-family: 'Courier New', Courier, monospace;
+          font-size: 12px;
+          color: #000;
+          background: #fff;
+          margin: 0 auto;
+          padding: 0;
+        }
+        .receipt-center { text-align: center; }
+        .receipt-bold { font-weight: bold; }
+        .receipt-row { display: flex; justify-content: space-between; font-size: 12px; }
+        .receipt-hr { border: none; border-top: 1px dashed #000; margin: 4px 0; }
+        .receipt-items-header { font-weight: bold; border-bottom: 1px solid #000; }
+        .receipt-qr { display: flex; flex-direction: column; align-items: center; margin-top: 8px; }
+      `}</style>
+      <div className="receipt-center receipt-bold" style={{marginBottom: 4}}>{business.name}</div>
+      {business.address && <div className="receipt-center">{business.address}</div>}
+      {business.phone && <div className="receipt-center">{business.phone}</div>}
+      <div className="receipt-center">{timestamp ? new Date(timestamp).toLocaleString() : ''}</div>
+      <div className="receipt-center">Receipt #{receiptNumber}</div>
+      {sale.paymentMethod === 'credit' && (
+        <div className="receipt-center receipt-bold">CREDIT SALE FOR: {customerName}</div>
+      )}
+      <hr className="receipt-hr" />
+      <div className="receipt-row receipt-items-header">
+        <span style={{flex: 2}}>Item</span>
+        <span style={{flex: 1, textAlign: 'right'}}>Qty</span>
+        <span style={{flex: 1, textAlign: 'right'}}>Price</span>
+        <span style={{flex: 1, textAlign: 'right'}}>Total</span>
       </div>
-      <div className="border-t border-b border-dashed border-black py-2 my-2">
-        {cart.map(item => (
-          <div key={item.id} className="flex justify-between">
-            <span>{item.name} x{item.quantity}</span>
-            <span>UGX {(item.price * item.quantity).toLocaleString()}</span>
-          </div>
-        ))}
+      {cart.map(item => (
+        <div key={item.id} className="receipt-row">
+          <span style={{flex: 2}}>{item.name}</span>
+          <span style={{flex: 1, textAlign: 'right'}}>{item.quantity}</span>
+          <span style={{flex: 1, textAlign: 'right'}}>{item.price.toLocaleString()}</span>
+          <span style={{flex: 1, textAlign: 'right'}}>{(item.price * item.quantity).toLocaleString()}</span>
+        </div>
+      ))}
+      <hr className="receipt-hr" />
+      <div className="receipt-row">
+        <span>Subtotal:</span>
+        <span>{subtotal.toLocaleString()}</span>
       </div>
-      <div className="flex justify-between font-bold text-sm">
-        <span>Total</span>
-        <span>UGX {total.toLocaleString()}</span>
+      <div className="receipt-row">
+        <span>Tax:</span>
+        <span>{tax.toLocaleString()}</span>
       </div>
-      <p className="text-center mt-4">Thank you for your visit!</p>
+      <div className="receipt-row receipt-bold">
+        <span>Total:</span>
+        <span>{total.toLocaleString()}</span>
+      </div>
+      <hr className="receipt-hr" />
+      <div className="receipt-qr">
+        {receiptNumber && <QRCode value={receiptNumber} size={64} />}
+        {receiptNumber && <div>Order: {receiptNumber}</div>}
+      </div>
+      <div className="receipt-center" style={{marginTop: 8}}>{footer}</div>
     </div>
   );
 });

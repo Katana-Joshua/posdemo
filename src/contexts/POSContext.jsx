@@ -240,7 +240,9 @@ export const POSProvider = ({ children }) => {
   const addCategory = async (name) => {
     try {
       const newCategory = await apiClient.addCategory({ name });
-      setCategories(prev => [...prev, newCategory]);
+      // Refresh categories from backend after adding
+      const updatedCategories = await apiClient.getCategories();
+      setCategories(updatedCategories || []);
       toast({ title: "Category Added" });
     } catch (error) {
       toast({ title: "Error", description: error.message, variant: "destructive" });
