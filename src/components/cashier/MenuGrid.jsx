@@ -78,12 +78,12 @@ const MenuGrid = () => {
           >
             <Card className="glass-effect border-amber-800/50 hover:border-amber-600/50 transition-all cursor-pointer group">
               <CardContent className="p-4">
-                <div className="aspect-square mb-3 overflow-hidden rounded-lg">
+                <div className="aspect-square mb-3 bg-white rounded-lg flex items-center justify-center">
                   {item.image ? (
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="max-w-full max-h-full object-contain"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-amber-900 to-amber-950 flex items-center justify-center">
