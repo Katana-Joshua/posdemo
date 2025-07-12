@@ -136,29 +136,33 @@ const AdminDashboard = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="flex flex-nowrap overflow-x-auto whitespace-nowrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
-            <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600">
-              <FileText className="w-4 h-4 mr-2" /> Reports
-            </TabsTrigger>
-            <TabsTrigger value="inventory" className="data-[state=active]:bg-amber-600">
-              <Package className="w-4 h-4 mr-2" /> Inventory
-            </TabsTrigger>
-            <TabsTrigger value="credit_sales" className="data-[state=active]:bg-amber-600">
-              <BookUser className="w-4 h-4 mr-2" /> Credit Sales
-            </TabsTrigger>
-            <TabsTrigger value="expenses" className="data-[state=active]:bg-amber-600">
-              <TrendingDown className="w-4 h-4 mr-2" /> Expenses
-            </TabsTrigger>
-            <TabsTrigger value="staff_management" className="data-[state=active]:bg-amber-600">
-              <Users className="w-4 h-4 mr-2" /> Staff
-            </TabsTrigger>
-            <TabsTrigger value="shift_logs" className="data-[state=active]:bg-amber-600">
-              <BarChart3 className="w-4 h-4 mr-2" /> Shift Logs
-            </TabsTrigger>
-            <TabsTrigger value="alerts" className="data-[state=active]:bg-amber-600">
-              <AlertTriangle className="w-4 h-4 mr-2" /> Alerts
-            </TabsTrigger>
-          </TabsList>
+          <div className="relative">
+            <TabsList className="flex flex-nowrap overflow-x-auto whitespace-nowrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1 scrollbar-thin scrollbar-thumb-amber-700 scrollbar-track-transparent" style={{scrollbarColor:'#d97706 #0000', borderBottom: '2px solid #d97706'}}>
+              <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <FileText className="w-4 h-4 mr-2" /> Reports
+              </TabsTrigger>
+              <TabsTrigger value="inventory" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <Package className="w-4 h-4 mr-2" /> Inventory
+              </TabsTrigger>
+              <TabsTrigger value="credit_sales" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <BookUser className="w-4 h-4 mr-2" /> Credit Sales
+              </TabsTrigger>
+              <TabsTrigger value="expenses" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <TrendingDown className="w-4 h-4 mr-2" /> Expenses
+              </TabsTrigger>
+              <TabsTrigger value="staff_management" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <Users className="w-4 h-4 mr-2" /> Staff
+              </TabsTrigger>
+              <TabsTrigger value="shift_logs" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <BarChart3 className="w-4 h-4 mr-2" /> Shift Logs
+              </TabsTrigger>
+              <TabsTrigger value="alerts" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <AlertTriangle className="w-4 h-4 mr-2" /> Alerts
+              </TabsTrigger>
+            </TabsList>
+            {/* Fade effect for scroll hint */}
+            <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black/80 to-transparent hidden sm:block" />
+          </div>
 
           <TabsContent value="reports">
             <SalesReports />
