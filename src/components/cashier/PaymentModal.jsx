@@ -32,10 +32,15 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
             max-width: 80mm;
             font-family: 'Courier New', Courier, monospace;
             font-size: 12px;
-            color: #000;
+            color: #000 !important;
             background: #fff;
             margin: 0 auto;
             padding: 0;
+            font-weight: bold !important;
+          }
+          .receipt-print * {
+            color: #000 !important;
+            font-weight: bold !important;
           }
         }
         .receipt-print {
@@ -47,6 +52,7 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
           background: #fff;
           margin: 0 auto;
           padding: 0;
+          font-weight: bold;
         }
         .receipt-center { text-align: center; }
         .receipt-bold { font-weight: bold; }
