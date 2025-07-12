@@ -72,7 +72,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full px-2 mb-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -136,29 +136,17 @@ const AdminDashboard = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 bg-black/20 border border-amber-800/30">
-            <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600">
-              <FileText className="w-4 h-4 mr-2" /> Reports
-            </TabsTrigger>
-            <TabsTrigger value="inventory" className="data-[state=active]:bg-amber-600">
-              <Package className="w-4 h-4 mr-2" /> Inventory
-            </TabsTrigger>
-            <TabsTrigger value="credit_sales" className="data-[state=active]:bg-amber-600">
-              <BookUser className="w-4 h-4 mr-2" /> Credit Sales
-            </TabsTrigger>
-            <TabsTrigger value="expenses" className="data-[state=active]:bg-amber-600">
-              <TrendingDown className="w-4 h-4 mr-2" /> Expenses
-            </TabsTrigger>
-            <TabsTrigger value="staff_management" className="data-[state=active]:bg-amber-600">
-              <Users className="w-4 h-4 mr-2" /> Staff
-            </TabsTrigger>
-            <TabsTrigger value="shift_logs" className="data-[state=active]:bg-amber-600">
-              <BarChart3 className="w-4 h-4 mr-2" /> Shift Logs
-            </TabsTrigger>
-            <TabsTrigger value="alerts" className="data-[state=active]:bg-amber-600">
-              <AlertTriangle className="w-4 h-4 mr-2" /> Alerts
-            </TabsTrigger>
-          </TabsList>
+          {/* Navigation Tabs */}
+          <div className="flex flex-wrap gap-2 overflow-x-auto py-2 w-full text-sm">
+            {/* Each nav item here, e.g.: */}
+            <button className="px-3 py-1 rounded bg-amber-600 text-white whitespace-nowrap">Reports</button>
+            <button className="px-3 py-1 rounded bg-amber-700 text-white whitespace-nowrap">Inventory</button>
+            <button className="px-3 py-1 rounded bg-amber-700 text-white whitespace-nowrap">Credit Sales</button>
+            <button className="px-3 py-1 rounded bg-amber-700 text-white whitespace-nowrap">Expenses</button>
+            <button className="px-3 py-1 rounded bg-amber-700 text-white whitespace-nowrap">Staff</button>
+            <button className="px-3 py-1 rounded bg-amber-700 text-white whitespace-nowrap">Shift Logs</button>
+            <button className="px-3 py-1 rounded bg-amber-700 text-white whitespace-nowrap">Alerts</button>
+          </div>
 
           <TabsContent value="reports">
             <SalesReports />
