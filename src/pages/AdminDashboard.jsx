@@ -170,34 +170,29 @@ const AdminDashboard = () => {
             {/* Fade effect for scroll hint, only on mobile */}
             <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black/80 to-transparent block sm:hidden" />
           </div>
-
-          <TabsContent value="reports">
-            <SalesReports />
-          </TabsContent>
-
-          <TabsContent value="inventory">
-            <InventoryManagement />
-          </TabsContent>
-
-          <TabsContent value="credit_sales">
-            <CreditSalesManagement />
-          </TabsContent>
-
-          <TabsContent value="expenses">
-            <ExpenseTracking />
-          </TabsContent>
-
-          <TabsContent value="staff_management">
-            <StaffManagement />
-          </TabsContent>
-            
-          <TabsContent value="shift_logs">
-            <StaffLogs />
-          </TabsContent>
-
-          <TabsContent value="alerts">
-            <LowStockAlerts />
-          </TabsContent>
+          <div className="mt-4 sm:mt-0">
+            <TabsContent value="reports">
+              <SalesReports />
+            </TabsContent>
+            <TabsContent value="inventory">
+              <InventoryManagement />
+            </TabsContent>
+            <TabsContent value="credit_sales">
+              <CreditSalesManagement />
+            </TabsContent>
+            <TabsContent value="expenses">
+              <ExpenseTracking />
+            </TabsContent>
+            <TabsContent value="staff_management">
+              <StaffManagement />
+            </TabsContent>
+            <TabsContent value="shift_logs">
+              <StaffLogs />
+            </TabsContent>
+            <TabsContent value="alerts">
+              <LowStockAlerts />
+            </TabsContent>
+          </div>
         </Tabs>
       </motion.div>
     </div>
