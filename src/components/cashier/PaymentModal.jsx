@@ -27,15 +27,48 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
     <div ref={ref} className="receipt-print">
       <style>{`
         @media print {
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
+          body {
+            background: white !important;
+            color: black !important;
+          }
           .receipt-print {
             width: 80mm;
             max-width: 80mm;
             font-family: 'Courier New', Courier, monospace;
             font-size: 12px;
-            color: #000;
-            background: #fff;
+            color: #000 !important;
+            background: #fff !important;
             margin: 0 auto;
             padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
+          .receipt-bold {
+            font-weight: 900 !important;
+            font-size: 13px !important;
+            color: #000 !important;
+            text-shadow: 0 0 0.5px #000 !important;
+          }
+          .receipt-row {
+            font-weight: 600 !important;
+            color: #000 !important;
+            text-shadow: 0 0 0.3px #000 !important;
+          }
+          .receipt-items-header {
+            font-weight: 900 !important;
+            font-size: 13px !important;
+            color: #000 !important;
+            text-shadow: 0 0 0.5px #000 !important;
+          }
+          .receipt-hr {
+            border-top: 2px dashed #000 !important;
+            color: #000 !important;
           }
         }
         .receipt-print {
@@ -49,19 +82,34 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
           padding: 0;
         }
         .receipt-center { text-align: center; }
-        .receipt-bold { font-weight: bold; }
-        .receipt-row { display: flex; justify-content: space-between; font-size: 12px; }
-        .receipt-hr { border: none; border-top: 1px dashed #000; margin: 4px 0; }
-        .receipt-items-header { font-weight: bold; border-bottom: 1px solid #000; }
+        .receipt-bold { 
+          font-weight: 900; 
+          font-size: 13px;
+          color: #000;
+        }
+        .receipt-row { 
+          display: flex; 
+          justify-content: space-between; 
+          font-size: 12px; 
+          font-weight: 600;
+          color: #000;
+        }
+        .receipt-hr { border: none; border-top: 2px dashed #000; margin: 4px 0; }
+        .receipt-items-header { 
+          font-weight: 900; 
+          font-size: 13px;
+          border-bottom: 2px solid #000; 
+          color: #000;
+        }
         .receipt-qr { display: flex; flex-direction: column; align-items: center; margin-top: 8px; }
       `}</style>
-      <div className="receipt-center receipt-bold" style={{marginBottom: 4}}>{business.name}</div>
-      {business.address && <div className="receipt-center">{business.address}</div>}
-      {business.phone && <div className="receipt-center">{business.phone}</div>}
-      <div className="receipt-center">{timestamp ? new Date(timestamp).toLocaleString() : ''}</div>
-      <div className="receipt-center">Receipt #{receiptNumber}</div>
+      <div className="receipt-center receipt-bold" style={{marginBottom: 4, fontSize: '14px'}}>{business.name}</div>
+      {business.address && <div className="receipt-center" style={{fontWeight: 600}}>{business.address}</div>}
+      {business.phone && <div className="receipt-center" style={{fontWeight: 600}}>{business.phone}</div>}
+      <div className="receipt-center" style={{fontWeight: 600}}>{timestamp ? new Date(timestamp).toLocaleString() : ''}</div>
+      <div className="receipt-center receipt-bold">Receipt #{receiptNumber}</div>
       {sale.paymentMethod === 'credit' && (
-        <div className="receipt-center receipt-bold">CREDIT SALE FOR: {customerName}</div>
+        <div className="receipt-center receipt-bold" style={{fontSize: '13px'}}>CREDIT SALE FOR: {customerName}</div>
       )}
       <hr className="receipt-hr" />
       <div className="receipt-row receipt-items-header">
@@ -87,7 +135,7 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
         <span>Tax:</span>
         <span>{tax.toLocaleString()}</span>
       </div>
-      <div className="receipt-row receipt-bold">
+      <div className="receipt-row receipt-bold" style={{fontSize: '14px', marginTop: '4px'}}>
         <span>Total:</span>
         <span>{total.toLocaleString()}</span>
       </div>
@@ -102,7 +150,7 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
         )}
         {receiptNumber && <div>Order: {receiptNumber}</div>}
       </div>
-      <div className="receipt-center" style={{marginTop: 8}}>{footer}</div>
+      <div className="receipt-center receipt-bold" style={{marginTop: 8, fontSize: '13px'}}>{footer}</div>
     </div>
   );
 });
