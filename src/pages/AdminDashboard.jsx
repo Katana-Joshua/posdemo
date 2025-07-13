@@ -170,7 +170,7 @@ const AdminDashboard = () => {
             {/* Fade effect for scroll hint, only on mobile */}
             <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black/80 to-transparent block sm:hidden" />
           </div>
-          <div className="mt-4 sm:mt-0">
+          <div className="mt-10 sm:mt-0">
             <TabsContent value="reports">
               <SalesReports />
             </TabsContent>
