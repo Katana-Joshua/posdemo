@@ -144,10 +144,7 @@ const AdminDashboard = () => {
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="relative">
-            <TabsList
-              ref={tabsListRef}
-              className="flex flex-nowrap overflow-x-auto whitespace-nowrap sm:grid sm:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1 scrollbar-thin scrollbar-thumb-amber-700 scrollbar-track-transparent sm:overflow-x-visible sm:whitespace-normal"
-              style={{scrollbarColor:'#d97706 #0000', borderBottom: '2px solid #d97706'}}>
+            <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
               <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
                 <FileText className="w-4 h-4 mr-2" /> Reports
               </TabsTrigger>
