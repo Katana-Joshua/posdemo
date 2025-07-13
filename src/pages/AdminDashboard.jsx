@@ -142,7 +142,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Main Content */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6 mb-10">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="relative">
             <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
               <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
@@ -170,6 +170,7 @@ const AdminDashboard = () => {
             {/* Fade effect for scroll hint, only on mobile */}
             <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black/80 to-transparent block sm:hidden" />
           </div>
+          <div className="h-10 sm:h-0" />
           <div className="mt-10 sm:mt-0">
             <TabsContent value="reports">
               <SalesReports />
