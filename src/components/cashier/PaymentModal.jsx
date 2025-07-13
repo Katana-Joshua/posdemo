@@ -107,7 +107,7 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
       {business.address && <div className="receipt-center" style={{fontWeight: 600}}>{business.address}</div>}
       {business.phone && <div className="receipt-center" style={{fontWeight: 600}}>{business.phone}</div>}
       <div className="receipt-center" style={{fontWeight: 600}}>{timestamp ? new Date(timestamp).toLocaleString() : ''}</div>
-      <div className="receipt-center receipt-bold">Receipt #{receiptNumber}</div>
+      <div className="receipt-center receipt-bold" style={{fontSize: '13px'}}>Receipt #{receiptNumber}</div>
       {sale.paymentMethod === 'credit' && (
         <div className="receipt-center receipt-bold" style={{fontSize: '13px'}}>CREDIT SALE FOR: {customerName}</div>
       )}
