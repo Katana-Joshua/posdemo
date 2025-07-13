@@ -142,7 +142,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Main Content */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6 mb-10">
           <div className="relative">
             <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
               <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
