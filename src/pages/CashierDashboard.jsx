@@ -60,7 +60,7 @@ const CashierDashboard = () => {
         >
           <div>
             <h1 className="text-3xl font-bold text-amber-100">Demo Terminal</h1>
-            <p className="text-amber-200/80">Welcome, {currentShift.cashierName}</p>
+            <p className="text-amber-200/80">Welcome, {currentShift.cashierName} </p>
           </div>
           <div className="flex items-center gap-4">
             <Button
