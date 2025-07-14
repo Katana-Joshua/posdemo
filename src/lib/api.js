@@ -229,6 +229,11 @@ class ApiClient {
   async getBalanceSheet() {
     return this.request('/accounting/reports?report=balance-sheet');
   }
+
+  // Shift methods
+  async getShifts() {
+    return this.request('/shifts');
+  }
 }
 
 export const apiClient = new ApiClient(); 
