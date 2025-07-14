@@ -28,7 +28,7 @@ export const POSProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedShift = localStorage.getItem('demo_shift');
+    const savedShift = localStorage.getItem('moonland_shift');
     if (savedShift) {
       setCurrentShift(JSON.parse(savedShift));
     }
@@ -187,13 +187,13 @@ export const POSProvider = ({ children }) => {
       startingCash: parseFloat(startingCash),
     };
     setCurrentShift(shift);
-    localStorage.setItem('demo_shift', JSON.stringify(shift));
+    localStorage.setItem('moonland_shift', JSON.stringify(shift));
     toast({ title: "Shift Started", description: `Welcome ${cashierName}!` });
   };
 
   const endShift = () => {
     setCurrentShift(null);
-    localStorage.removeItem('demo_shift');
+    localStorage.removeItem('moonland_shift');
     toast({ title: "Shift Ended" });
   };
 
