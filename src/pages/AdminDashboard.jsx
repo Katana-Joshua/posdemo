@@ -15,6 +15,7 @@ import StaffManagement from '@/components/admin/StaffManagement.jsx';
 import ExpenseTracking from '@/components/admin/ExpenseTracking.jsx';
 import CreditSalesManagement from '@/components/admin/CreditSalesManagement.jsx';
 import AccountingDashboard from '@/components/admin/accounting/AccountingDashboard';
+import ShiftLog from '@/components/admin/ShiftLog.jsx';
 
 const AdminDashboard = () => {
   const { user, signOut } = useAuth();
@@ -195,7 +196,7 @@ const AdminDashboard = () => {
               <StaffManagement />
             </TabsContent>
             <TabsContent value="shift_logs">
-              <StaffLogs />
+              <ShiftLog />
             </TabsContent>
             <TabsContent value="alerts">
               <LowStockAlerts />
