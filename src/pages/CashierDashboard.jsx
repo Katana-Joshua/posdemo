@@ -59,7 +59,7 @@ const CashierDashboard = () => {
           className="flex justify-between items-center mb-6"
         >
           <div>
-            <h1 className="text-3xl font-bold text-amber-100">Moon Land Terminal</h1>
+            <h1 className="text-3xl font-bold text-amber-100">Demo Terminal</h1>
             <p className="text-amber-200/80">Welcome, {currentShift.cashierName}</p>
           </div>
           <div className="flex items-center gap-4">

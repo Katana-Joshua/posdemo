@@ -17,7 +17,7 @@ function App() {
         <POSProvider>
           <AccountingProvider>
             <Helmet>
-                <title>Moon Land - Point of Sale System</title>
+                <title>Demo - Point of Sale System</title>
                 <meta name="description" content="Modern point of sale system for bars and restaurants, featuring admin and cashier dashboards, inventory management, and sales reporting." />
             </Helmet>
             <div className="min-h-screen bar-gradient">

@@ -44,7 +44,7 @@ const LoginPage = () => {
       >
         <div className="glass-effect p-8 rounded-lg">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-amber-100 mb-2">Moon Land</h1>
+            <h1 className="text-3xl font-bold text-amber-100 mb-2">Demo</h1>
             <p className="text-amber-200/80">Point of Sale System</p>
           </div>
 

@@ -18,7 +18,7 @@ const Receipt = React.forwardRef(({ sale, cart }, ref) => {
   const timestamp = sale.timestamp || sale.created_at || '';
   const customerName = sale.customerInfo?.name || sale.customer_info?.name || '';
   const business = {
-    name: 'Moon Land POS',
+    name: 'Demo POS',
     address: '', // Add address if available
     phone: '',   // Add phone if available
   };

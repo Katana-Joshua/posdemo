@@ -68,7 +68,7 @@ const AdminDashboard = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-amber-100">Moon Land - Admin</h1>
+            <h1 className="text-3xl font-bold text-amber-100">Demo - Admin</h1>
             <p className="text-amber-200/80">Welcome back, {user?.name || user?.email}</p>
           </div>
           <Button
