@@ -179,16 +179,16 @@ export const POSProvider = ({ children }) => {
   };
 
   // --- Shift ---
-  const startShift = (cashierName, startingCash) => {
-    const shift = {
-      id: Date.now().toString(),
-      cashierName,
-      startTime: new Date().toISOString(),
-      startingCash: parseFloat(startingCash),
-    };
-    setCurrentShift(shift);
-    localStorage.setItem('moonland_shift', JSON.stringify(shift));
-    toast({ title: "Shift Started", description: `Welcome ${cashierName}!` });
+  const startShift = async (cashierName, startingCash) => {
+    const startTime = new Date().toISOString();
+    try {
+      const newShift = await apiClient.addShift({ cashierName, startTime, startingCash: parseFloat(startingCash) });
+      setCurrentShift({ ...newShift, id: newShift.id });
+      localStorage.setItem('moonland_shift', JSON.stringify({ ...newShift, id: newShift.id }));
+      toast({ title: "Shift Started", description: `Welcome ${cashierName}!` });
+    } catch (error) {
+      toast({ title: "Shift Start Failed", description: error.message, variant: "destructive" });
+    }
   };
 
   const endShift = () => {

@@ -234,6 +234,12 @@ class ApiClient {
   async getShifts() {
     return this.request('/shifts');
   }
+  async addShift(shift) {
+    return this.request('/shifts', {
+      method: 'POST',
+      body: JSON.stringify(shift),
+    });
+  }
 }
 
 export const apiClient = new ApiClient(); 
