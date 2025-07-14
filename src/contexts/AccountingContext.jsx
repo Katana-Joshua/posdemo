@@ -318,11 +318,32 @@ export const AccountingProvider = ({ children }) => {
     addVoucher,
     updateVoucher,
     deleteVoucher,
-  } : {};
+  } : {
+    accounts: [],
+    vouchers: [],
+    sales: [],
+    expenses: [],
+    transactions: [],
+    ledgers: {},
+    trialBalance: {},
+    profitAndLoss: { revenue: 0, cogs: 0, grossProfit: 0, operatingExpenses: 0, netProfit: 0 },
+    balanceSheet: { assets: {}, liabilities: {}, equity: {} },
+    stockValuation: [],
+    loadingAccounts,
+    loadingVouchers,
+    loadingSales,
+    loadingExpenses,
+    addAccount: () => Promise.resolve(null),
+    updateAccount: () => Promise.resolve(null),
+    deleteAccount: () => Promise.resolve(false),
+    addVoucher: () => Promise.resolve(null),
+    updateVoucher: () => Promise.resolve(null),
+    deleteVoucher: () => Promise.resolve(false),
+  };
 
   return (
     <AccountingContext.Provider value={value}>
-      {isAdmin ? children : null}
+      {children}
     </AccountingContext.Provider>
   );
 }; 
