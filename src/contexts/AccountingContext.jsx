@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { apiClient } from '@/lib/api.js';
 import { toast } from '@/components/ui/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
 
 const AccountingContext = createContext();
 
@@ -13,6 +14,7 @@ export const useAccounting = () => {
 };
 
 export const AccountingProvider = ({ children }) => {
+  const { user } = useAuth();
   const [accounts, setAccounts] = useState([]);
   const [vouchers, setVouchers] = useState([]);
   const [ledgers, setLedgers] = useState({});
@@ -20,8 +22,9 @@ export const AccountingProvider = ({ children }) => {
   const [loadingVouchers, setLoadingVouchers] = useState(true);
   const [loadingLedgers, setLoadingLedgers] = useState(false);
 
-  // Load accounts
+  // Load accounts only if user is authenticated
   useEffect(() => {
+    if (!user) return;
     const fetchAccounts = async () => {
       setLoadingAccounts(true);
       try {
@@ -38,10 +41,11 @@ export const AccountingProvider = ({ children }) => {
       }
     };
     fetchAccounts();
-  }, []);
+  }, [user]);
 
-  // Load vouchers
+  // Load vouchers only if user is authenticated
   useEffect(() => {
+    if (!user) return;
     const fetchVouchers = async () => {
       setLoadingVouchers(true);
       try {
@@ -58,7 +62,7 @@ export const AccountingProvider = ({ children }) => {
       }
     };
     fetchVouchers();
-  }, []);
+  }, [user]);
 
   const addAccount = async (account) => {
     try {
