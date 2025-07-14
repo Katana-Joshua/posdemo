@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext.jsx';
 import { usePOS } from '@/contexts/POSContext.jsx';
-import { LogOut, BarChart3, Package, FileText, AlertTriangle, Users, TrendingDown, BookUser, Loader2 } from 'lucide-react';
+import { LogOut, BarChart3, Package, FileText, AlertTriangle, Users, TrendingDown, BookUser, Loader2, Calculator, Scale, Receipt } from 'lucide-react';
 import SalesReports from '@/components/admin/SalesReports.jsx';
 import InventoryManagement from '@/components/admin/InventoryManagement.jsx';
 import StaffLogs from '@/components/admin/StaffLogs.jsx';
@@ -14,6 +14,9 @@ import LowStockAlerts from '@/components/admin/LowStockAlerts.jsx';
 import StaffManagement from '@/components/admin/StaffManagement.jsx';
 import ExpenseTracking from '@/components/admin/ExpenseTracking.jsx';
 import CreditSalesManagement from '@/components/admin/CreditSalesManagement.jsx';
+import ChartOfAccounts from '@/components/admin/accounting/ChartOfAccounts.jsx';
+import VoucherEntry from '@/components/admin/accounting/VoucherEntry.jsx';
+import TrialBalance from '@/components/admin/accounting/TrialBalance.jsx';
 
 const AdminDashboard = () => {
   const { user, signOut } = useAuth();
@@ -144,7 +147,7 @@ const AdminDashboard = () => {
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="relative">
-            <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
+            <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-10 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
               <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
                 <FileText className="w-4 h-4 mr-2" /> Reports
               </TabsTrigger>
@@ -156,6 +159,15 @@ const AdminDashboard = () => {
               </TabsTrigger>
               <TabsTrigger value="expenses" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
                 <TrendingDown className="w-4 h-4 mr-2" /> Expenses
+              </TabsTrigger>
+              <TabsTrigger value="accounts" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <Calculator className="w-4 h-4 mr-2" /> Accounts
+              </TabsTrigger>
+              <TabsTrigger value="vouchers" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <Receipt className="w-4 h-4 mr-2" /> Vouchers
+              </TabsTrigger>
+              <TabsTrigger value="trial_balance" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+                <Scale className="w-4 h-4 mr-2" /> Trial Balance
               </TabsTrigger>
               <TabsTrigger value="staff_management" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
                 <Users className="w-4 h-4 mr-2" /> Staff
@@ -183,6 +195,15 @@ const AdminDashboard = () => {
             </TabsContent>
             <TabsContent value="expenses">
               <ExpenseTracking />
+            </TabsContent>
+            <TabsContent value="accounts">
+              <ChartOfAccounts />
+            </TabsContent>
+            <TabsContent value="vouchers">
+              <VoucherEntry />
+            </TabsContent>
+            <TabsContent value="trial_balance">
+              <TrialBalance />
             </TabsContent>
             <TabsContent value="staff_management">
               <StaffManagement />

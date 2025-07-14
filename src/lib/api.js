@@ -154,6 +154,71 @@ class ApiClient {
       method: 'DELETE',
     });
   }
+
+  // Accounting methods
+  async getAccounts() {
+    return this.request('/accounts');
+  }
+
+  async addAccount(account) {
+    return this.request('/accounts', {
+      method: 'POST',
+      body: JSON.stringify(account),
+    });
+  }
+
+  async updateAccount(id, account) {
+    return this.request(`/accounts/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(account),
+    });
+  }
+
+  async deleteAccount(id) {
+    return this.request(`/accounts/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async getVouchers() {
+    return this.request('/vouchers');
+  }
+
+  async addVoucher(voucher) {
+    return this.request('/vouchers', {
+      method: 'POST',
+      body: JSON.stringify(voucher),
+    });
+  }
+
+  async updateVoucher(id, voucher) {
+    return this.request(`/vouchers/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(voucher),
+    });
+  }
+
+  async deleteVoucher(id) {
+    return this.request(`/vouchers/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async getLedgers() {
+    return this.request('/accounting/ledgers');
+  }
+
+  async getTrialBalance() {
+    return this.request('/accounting/reports?report=trial-balance');
+  }
+
+  async getProfitAndLoss() {
+    return this.request('/accounting/reports?report=profit-loss');
+  }
+
+  async getBalanceSheet() {
+    return this.request('/accounting/reports?report=balance-sheet');
+  }
 }
 
 export const apiClient = new ApiClient(); 
