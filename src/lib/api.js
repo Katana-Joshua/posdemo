@@ -23,6 +23,16 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
+      if (response.status === 401) {
+        // Unauthorized: clear token and redirect to login
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_user');
+        if (typeof window !== 'undefined') {
+          alert('Session expired or not authorized. Please sign in again.');
+          window.location.href = '/';
+        }
+        throw new Error('Access token required or expired');
+      }
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.error || 'Request failed');
