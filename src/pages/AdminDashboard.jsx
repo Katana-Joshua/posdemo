@@ -145,8 +145,8 @@ const AdminDashboard = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="overflow-x-auto pb-2 sm:-mx-4 sm:px-4 lg:mx-0 lg:px-0">
-            <TabsList className="bg-transparent p-0 w-full space-x-2 sm:grid sm:w-full sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 sm:gap-2 sm:space-x-0">
+          <div className="overflow-x-auto pb-2">
+            <TabsList className="flex w-max gap-2 bg-transparent p-0 sm:grid sm:w-full sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 sm:gap-2">
               <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <FileText className="w-4 h-4 mr-2" /> Reports
               </TabsTrigger>
