@@ -144,36 +144,34 @@ const AdminDashboard = () => {
         </div>
 
         {/* Main Content */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <div className="relative">
-            <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-10 w-full bg-black/20 border border-amber-800/30 gap-1 p-1">
-              <TabsTrigger value="reports" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <div className="overflow-x-auto pb-2 -mx-4 px-4 lg:mx-0 lg:px-0">
+            <TabsList className="bg-transparent p-0 space-x-2 sm:grid sm:w-full sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 sm:gap-2 sm:space-x-0 w-full">
+              <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <FileText className="w-4 h-4 mr-2" /> Reports
               </TabsTrigger>
-              <TabsTrigger value="inventory" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+              <TabsTrigger value="inventory" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <Package className="w-4 h-4 mr-2" /> Inventory
               </TabsTrigger>
-              <TabsTrigger value="credit_sales" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+              <TabsTrigger value="credit_sales" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <BookUser className="w-4 h-4 mr-2" /> Credit Sales
               </TabsTrigger>
-              <TabsTrigger value="expenses" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+              <TabsTrigger value="expenses" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <TrendingDown className="w-4 h-4 mr-2" /> Expenses
               </TabsTrigger>
-              <TabsTrigger value="accounting" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+              <TabsTrigger value="accounting" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <BookOpen className="w-4 h-4 mr-2" /> Accounting
               </TabsTrigger>
-              <TabsTrigger value="staff_management" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+              <TabsTrigger value="staff_management" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <Users className="w-4 h-4 mr-2" /> Staff
               </TabsTrigger>
-              <TabsTrigger value="shift_logs" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+              <TabsTrigger value="shift_logs" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <BarChart3 className="w-4 h-4 mr-2" /> Shift Logs
               </TabsTrigger>
-              <TabsTrigger value="alerts" className="px-4 py-2 rounded font-semibold data-[state=active]:bg-amber-600">
+              <TabsTrigger value="alerts" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
                 <AlertTriangle className="w-4 h-4 mr-2" /> Alerts
               </TabsTrigger>
             </TabsList>
-            {/* Fade effect for scroll hint, only on mobile */}
-            <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-black/80 to-transparent block sm:hidden" />
           </div>
           <div className="h-20 sm:h-0 bg-transparent" />
           <div className="sm:mt-0">

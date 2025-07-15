@@ -5,6 +5,57 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { usePOS } from '@/contexts/POSContext';
 import { ShoppingCart, Plus, Minus, Trash2, CreditCard } from 'lucide-react';
+import { useState } from 'react';
+
+const CartItemPrice = ({ item }) => {
+  const { updateCartItemPrice } = usePOS();
+  const [isEditing, setIsEditing] = useState(false);
+  const [price, setPrice] = useState(item.price);
+
+  const handlePriceUpdate = () => {
+    const newPrice = parseFloat(price);
+    if (isNaN(newPrice)) {
+      setPrice(item.price); // Reset to original cart price
+      setIsEditing(false);
+      return;
+    }
+    updateCartItemPrice(item.id, newPrice);
+    setIsEditing(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handlePriceUpdate();
+    } else if (e.key === 'Escape') {
+      setPrice(item.price);
+      setIsEditing(false);
+    }
+  };
+
+  if (isEditing) {
+    return (
+      <input
+        type="number"
+        value={price}
+        onChange={e => setPrice(e.target.value)}
+        onBlur={handlePriceUpdate}
+        onKeyDown={handleKeyDown}
+        className="h-7 w-28 text-xs text-right bg-black/30 border-amber-600 rounded"
+        autoFocus
+      />
+    );
+  }
+
+  return (
+    <button
+      onClick={() => setIsEditing(true)}
+      className="text-xs text-amber-200/80 hover:text-amber-100 hover:underline flex items-center gap-1"
+    >
+      UGX {item.price.toLocaleString()} each
+      <svg className="w-3 h-3 opacity-70" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536M9 11l6 6M3 21h18" /></svg>
+    </button>
+  );
+};
 
 const Cart = ({ onCheckout }) => {
   const { cart, updateCartQuantity, removeFromCart, clearCart } = usePOS();
@@ -33,7 +84,7 @@ const Cart = ({ onCheckout }) => {
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex-1">
                     <h4 className="font-semibold text-amber-100 text-sm">{item.name}</h4>
-                    <p className="text-xs text-amber-200/80">UGX {item.price.toLocaleString()} each</p>
+                    <CartItemPrice item={item} />
                   </div>
                   <Button
                     size="sm"

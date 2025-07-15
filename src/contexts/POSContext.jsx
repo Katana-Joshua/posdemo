@@ -104,6 +104,25 @@ export const POSProvider = ({ children }) => {
       item.id === itemId ? { ...item, quantity } : item
     ));
   };
+
+  // --- Custom Price Editing ---
+  const updateCartItemPrice = (itemId, newPrice) => {
+    const cartItem = cart.find(item => item.id === itemId);
+    if (!cartItem) return;
+    const inventoryItem = inventory.find(item => item.id === itemId);
+    const minPrice = inventoryItem?.price ?? 0;
+    if (Number(newPrice) < Number(minPrice)) {
+      toast({
+        title: "Invalid Price",
+        description: `The price cannot be lower than the minimum of UGX ${minPrice.toLocaleString()}`,
+        variant: "destructive",
+      });
+      return;
+    }
+    setCart(cart.map(item =>
+      item.id === itemId ? { ...item, price: Number(newPrice) } : item
+    ));
+  };
   
   const clearCart = () => setCart([]);
 
@@ -281,6 +300,7 @@ export const POSProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     updateCartQuantity,
+    updateCartItemPrice,
     clearCart,
     processSale,
     payCreditSale,
