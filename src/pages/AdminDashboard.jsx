@@ -145,35 +145,37 @@ const AdminDashboard = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="overflow-x-auto pb-2 -mx-4 px-4 lg:mx-0 lg:px-0">
-            <TabsList className="bg-transparent p-0 space-x-2 sm:grid sm:w-full sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 sm:gap-2 sm:space-x-0 w-full">
-              <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+          <div className="pb-2">
+            <TabsList className="bg-transparent p-0 grid grid-cols-4 grid-rows-2 gap-2 w-full">
+              {/* First row of nav items */}
+              <TabsTrigger value="reports" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <FileText className="w-4 h-4 mr-2" /> Reports
               </TabsTrigger>
-              <TabsTrigger value="inventory" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+              <TabsTrigger value="inventory" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <Package className="w-4 h-4 mr-2" /> Inventory
               </TabsTrigger>
-              <TabsTrigger value="credit_sales" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+              <TabsTrigger value="credit_sales" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <BookUser className="w-4 h-4 mr-2" /> Credit Sales
               </TabsTrigger>
-              <TabsTrigger value="expenses" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+              <TabsTrigger value="expenses" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <TrendingDown className="w-4 h-4 mr-2" /> Expenses
               </TabsTrigger>
-              <TabsTrigger value="accounting" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+              {/* Second row of nav items (duplicate) */}
+              <TabsTrigger value="accounting" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <BookOpen className="w-4 h-4 mr-2" /> Accounting
               </TabsTrigger>
-              <TabsTrigger value="staff_management" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+              <TabsTrigger value="staff_management" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <Users className="w-4 h-4 mr-2" /> Staff
               </TabsTrigger>
-              <TabsTrigger value="shift_logs" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+              <TabsTrigger value="shift_logs" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <BarChart3 className="w-4 h-4 mr-2" /> Shift Logs
               </TabsTrigger>
-              <TabsTrigger value="alerts" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all flex-shrink-0">
+              <TabsTrigger value="alerts" className="data-[state=active]:bg-amber-600/80 data-[state=active]:text-white text-amber-200 bg-black/20 border border-amber-800/50 hover:bg-amber-900/40 transition-all">
                 <AlertTriangle className="w-4 h-4 mr-2" /> Alerts
               </TabsTrigger>
             </TabsList>
           </div>
-          <div className="h-20 sm:h-0 bg-transparent" />
+          <div className="h-30 sm:h-0 bg-transparent" />
           <div className="sm:mt-0">
             <TabsContent value="reports">
               <SalesReports />
