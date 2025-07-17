@@ -3,26 +3,30 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { usePOS } from '@/contexts/POSContext.jsx';
 import { Edit, Trash2, ImagePlus } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const CategoryManager = () => {
-  const { categories, addCategory, removeCategory, updateCategory } = usePOS();
+  const { categories, addCategory, removeCategory, updateCategory, refreshInventory } = usePOS();
   const [newCategory, setNewCategory] = useState('');
   const [editingCategory, setEditingCategory] = useState(null);
+  const [editForm, setEditForm] = useState({ name: '', image: '' });
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const categoryFileInputRef = useRef(null);
 
-  const handleAddCategory = () => {
+  const handleAddCategory = async () => {
     if (newCategory.trim()) {
-      addCategory(newCategory.trim());
+      await addCategory(newCategory.trim());
       setNewCategory('');
+      refreshInventory && refreshInventory();
     }
   };
 
   const handleCategoryImageChange = (e) => {
     const file = e.target.files[0];
-    if (file && editingCategory) {
+    if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        updateCategory(editingCategory.id, { image: reader.result });
+        setEditForm(form => ({ ...form, image: reader.result }));
       };
       reader.readAsDataURL(file);
     }
@@ -30,7 +34,21 @@ const CategoryManager = () => {
 
   const openCategoryEdit = (category) => {
     setEditingCategory(category);
-    categoryFileInputRef.current?.click();
+    setEditForm({ name: category.name, image: category.image || '' });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    await updateCategory(editingCategory.id, { name: editForm.name, image: editForm.image });
+    setIsEditDialogOpen(false);
+    setEditingCategory(null);
+    refreshInventory && refreshInventory();
+  };
+
+  const handleDeleteCategory = async (id) => {
+    await removeCategory(id);
+    refreshInventory && refreshInventory();
   };
 
   return (
@@ -61,20 +79,43 @@ const CategoryManager = () => {
               <Button size="sm" variant="ghost" onClick={() => openCategoryEdit(cat)}>
                 <Edit className="w-4 h-4 text-amber-400" />
               </Button>
-              <Button size="sm" variant="ghost" onClick={() => removeCategory(cat.id)}>
+              <Button size="sm" variant="ghost" onClick={() => handleDeleteCategory(cat.id)}>
                 <Trash2 className="w-4 h-4 text-red-400" />
               </Button>
             </div>
           </div>
         ))}
-        <input
-          type="file"
-          ref={categoryFileInputRef}
-          onChange={handleCategoryImageChange}
-          accept="image/*"
-          className="hidden"
-        />
       </div>
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="glass-effect border-amber-800/50">
+          <DialogHeader>
+            <DialogTitle className="text-amber-100">Edit Category</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleEditSubmit} className="space-y-4">
+            <Input
+              value={editForm.name}
+              onChange={e => setEditForm(f => ({ ...f, name: e.target.value }))}
+              placeholder="Category name"
+              className="bg-black/20 border-amber-800/50 text-amber-100"
+              required
+            />
+            <input
+              type="file"
+              ref={categoryFileInputRef}
+              onChange={handleCategoryImageChange}
+              accept="image/*"
+              className="bg-black/20 border-amber-800/50 text-amber-100"
+            />
+            {editForm.image && (
+              <img src={editForm.image} alt="Preview" className="mt-2 w-24 h-24 object-cover rounded-md" />
+            )}
+            <div className="flex gap-2">
+              <Button type="submit" className="bg-amber-600 hover:bg-amber-700">Save</Button>
+              <Button type="button" variant="outline" onClick={() => setIsEditDialogOpen(false)}>Cancel</Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

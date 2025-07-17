@@ -134,22 +134,3 @@ export const handleRemoveStaffMember = (staffId, staff, setStaff) => {
   setStaff(staff.filter(s => s.id !== staffId));
   toast({ title: "Staff Removed", description: `${staffMember?.name} has been removed.`, variant: "destructive" });
 };
-
-export const handleAddCategory = (categoryName, categories, setCategories) => {
-  if (categories.some(c => c.name === categoryName)) {
-    toast({ title: "Category exists", variant: "destructive" });
-    return;
-  }
-  setCategories([...categories, { name: categoryName, image: null }]);
-  toast({ title: "Category Added" });
-};
-
-export const handleRemoveCategory = (categoryName, categories, setCategories) => {
-  setCategories(categories.filter(c => c.name !== categoryName));
-  toast({ title: "Category Removed", variant: "destructive" });
-};
-
-export const handleUpdateCategory = (categoryName, updatedData, categories, setCategories) => {
-  setCategories(categories.map(c => c.name === categoryName ? { ...c, ...updatedData } : c));
-  toast({ title: "Category Updated" });
-};

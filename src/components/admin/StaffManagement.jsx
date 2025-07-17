@@ -68,7 +68,8 @@ const StaffManagement = () => {
         toast({ title: "Success", description: `${name} has been deleted.` });
         fetchStaff();
       } catch (error) {
-        toast({ title: "Failed to delete staff", description: error.message, variant: "destructive" });
+        toast({ title: "Failed to delete staff", description: error?.message || 'Unknown error', variant: "destructive" });
+        fetchStaff();
       }
     }
   };
