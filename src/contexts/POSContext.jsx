@@ -91,7 +91,7 @@ export const POSProvider = ({ children }) => {
     if (Number(newPrice) < Number(costPrice)) {
       toast({
         title: "Invalid Price",
-        description: `The price cannot be lower than the cost price of UGX ${costPrice.toLocaleString()}`,
+        description: `The selling price cannot be lower than the cost price of UGX ${costPrice.toLocaleString()}`,
         variant: "destructive",
       });
       return;
