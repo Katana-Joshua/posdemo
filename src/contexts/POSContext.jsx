@@ -87,7 +87,7 @@ export const POSProvider = ({ children }) => {
     if (!cartItem) return;
     const inventoryItem = inventory.find(item => item.id === itemId);
     const sellingPrice = inventoryItem?.price ?? 0;
-    const costPrice = inventoryItem?.cost_price ?? 0;
+    const costPrice = inventoryItem?.cost_price ?? inventoryItem?.costPrice ?? 0;
     if (Number(newPrice) < Number(costPrice)) {
       toast({
         title: "Invalid Price",
