@@ -18,6 +18,7 @@ class ApiClient {
         ...this.getAuthHeaders(),
         ...options.headers,
       },
+      cache: 'no-store',
       ...options,
     };
 
