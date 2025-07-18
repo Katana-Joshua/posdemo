@@ -38,35 +38,11 @@ export const POSProvider = ({ children }) => {
     if (user) {
       setLoading(true);
       Promise.all([
-        apiClient.getInventory().then(data => setInventory(data || [])),
-        apiClient.getSales().then(data => {
-          // Normalize monetary fields, status, and parse JSON fields
-          const normalized = (data || []).map(sale => {
-            let customerInfo = sale.customer_info;
-            if (typeof customerInfo === 'string') {
-              try { customerInfo = JSON.parse(customerInfo); } catch { customerInfo = {}; }
-            }
-            let items = sale.items;
-            if (typeof items === 'string') {
-              try { items = JSON.parse(items); } catch { items = []; }
-            }
-            return {
-              ...sale,
-              total: sale.total !== undefined ? Number(sale.total) : 0,
-              profit: sale.profit !== undefined ? Number(sale.profit) : 0,
-              total_cost: sale.total_cost !== undefined ? Number(sale.total_cost) : 0,
-              status: sale.status ? String(sale.status) : '',
-              customerInfo,
-              items,
-              timestamp: sale.created_at || sale.timestamp,
-              receiptNumber: sale.receipt_number || sale.receiptNumber,
-            };
-          });
-          setSales(normalized);
-        }),
-        apiClient.getExpenses().then(data => setExpenses(data || [])),
-        apiClient.getStaff().then(data => setStaff(data || [])),
-        apiClient.getCategories().then(data => setCategories(data || [])),
+        apiClient.getInventory().catch((err) => { toast({ title: 'Failed to load inventory', description: err.message, variant: 'destructive' }); return []; }),
+        apiClient.getSales().catch((err) => { toast({ title: 'Failed to load sales', description: err.message, variant: 'destructive' }); return []; }),
+        apiClient.getExpenses().catch((err) => { toast({ title: 'Failed to load expenses', description: err.message, variant: 'destructive' }); return []; }),
+        apiClient.getStaff().catch((err) => { toast({ title: 'Failed to load staff', description: err.message, variant: 'destructive' }); return []; }),
+        apiClient.getCategories().catch((err) => { toast({ title: 'Failed to load categories', description: err.message, variant: 'destructive' }); return []; }),
       ]).finally(() => setLoading(false));
     } else {
       // Clear data on logout
