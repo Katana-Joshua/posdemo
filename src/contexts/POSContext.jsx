@@ -110,14 +110,22 @@ export const POSProvider = ({ children }) => {
     const cartItem = cart.find(item => item.id === itemId);
     if (!cartItem) return;
     const inventoryItem = inventory.find(item => item.id === itemId);
-    const minPrice = inventoryItem?.price ?? 0;
-    if (Number(newPrice) < Number(minPrice)) {
+    const sellingPrice = inventoryItem?.price ?? 0;
+    const costPrice = inventoryItem?.cost_price ?? 0;
+    if (Number(newPrice) < Number(costPrice)) {
       toast({
         title: "Invalid Price",
-        description: `The price cannot be lower than the minimum of UGX ${minPrice.toLocaleString()}`,
+        description: `The price cannot be lower than the cost price of UGX ${costPrice.toLocaleString()}`,
         variant: "destructive",
       });
       return;
+    }
+    if (Number(newPrice) < Number(sellingPrice)) {
+      toast({
+        title: "Warning",
+        description: `You have set a price below the selling price (UGX ${sellingPrice.toLocaleString()}).`,
+        variant: "default",
+      });
     }
     setCart(cart.map(item =>
       item.id === itemId ? { ...item, price: Number(newPrice) } : item
